@@ -9,7 +9,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late final _ratingController;
+  late final TextEditingController _ratingController;
   late double _rating;
 
   double _userRating = 3.0;
@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
                   SizedBox(
                     height: 40.0,
                   ),
-                  _heading('Rating Bar'),
+                  // _heading('Rating Bar'),
                   _ratingBar(_ratingBarMode),
                   SizedBox(height: 20.0),
                   Text(
@@ -205,9 +205,9 @@ class _MyAppState extends State<MyApp> {
           minRating: 1,
           direction: _isVertical ? Axis.vertical : Axis.horizontal,
           allowHalfRating: true,
-          unratedColor: Colors.amber.withAlpha(50),
+          unratedColor: Colors.black,
           itemCount: 5,
-          itemSize: 50.0,
+          itemSize: 40.0,
           itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
           itemBuilder: (context, _) => Icon(
             _selectedIcon ?? Icons.star,

@@ -56,6 +56,7 @@ class RatingBar extends StatefulWidget {
     this.updateOnDrag = false,
     this.wrapAlignment = WrapAlignment.start,
     super.key,
+    this.decoration,
   })  : _itemBuilder = null,
         _ratingWidget = ratingWidget;
 
@@ -80,12 +81,15 @@ class RatingBar extends StatefulWidget {
     this.itemPadding = EdgeInsets.zero,
     this.itemSize = 40.0,
     this.minRating = 0,
+    this.decoration,
     this.tapOnlyMode = false,
     this.updateOnDrag = false,
     this.wrapAlignment = WrapAlignment.start,
     super.key,
   })  : _itemBuilder = itemBuilder,
         _ratingWidget = null;
+
+  final BoxDecoration? decoration;
 
   /// Return current rating whenever rating is updated.
   ///
@@ -261,6 +265,7 @@ class _RatingBarState extends State<RatingBar> {
         size: widget.itemSize,
         enableMask: ratingWidget == null,
         unratedColor: widget.unratedColor ?? Theme.of(context).disabledColor,
+        decoration: widget.decoration,
         child: ratingWidget?.empty ?? item!,
       );
     } else if (index >= _rating - ratingOffset && widget.allowHalfRating) {
@@ -290,11 +295,14 @@ class _RatingBarState extends State<RatingBar> {
       }
       iconRating += 0.5;
     } else {
-      resolvedRatingWidget = SizedBox(
-        width: widget.itemSize,
-        height: widget.itemSize,
-        child: FittedBox(
-          child: ratingWidget?.full ?? item,
+      resolvedRatingWidget = DecoratedBox(
+        decoration: widget.decoration ?? const BoxDecoration(),
+        child: SizedBox(
+          width: widget.itemSize,
+          height: widget.itemSize,
+          child: FittedBox(
+            child: ratingWidget?.full ?? item,
+          ),
         ),
       );
       iconRating += 1.0;
@@ -482,28 +490,33 @@ class _NoRatingWidget extends StatelessWidget {
     required this.child,
     required this.enableMask,
     required this.unratedColor,
+    this.decoration,
   });
 
   final double size;
   final Widget child;
   final bool enableMask;
   final Color unratedColor;
+  final BoxDecoration? decoration;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: size,
       width: size,
-      child: FittedBox(
-        child: enableMask
-            ? ColorFiltered(
-                colorFilter: ColorFilter.mode(
-                  unratedColor,
-                  BlendMode.srcIn,
-                ),
-                child: child,
-              )
-            : child,
+      child: DecoratedBox(
+        decoration: decoration ?? const BoxDecoration(),
+        child: FittedBox(
+          child: enableMask
+              ? ColorFiltered(
+                  colorFilter: ColorFilter.mode(
+                    unratedColor,
+                    BlendMode.srcIn,
+                  ),
+                  child: child,
+                )
+              : child,
+        ),
       ),
     );
   }
