@@ -297,11 +297,13 @@ class _RatingBarState extends State<RatingBar> {
     } else {
       resolvedRatingWidget = DecoratedBox(
         decoration: widget.decoration ?? const BoxDecoration(),
-        child: SizedBox(
-          width: widget.itemSize,
-          height: widget.itemSize,
-          child: FittedBox(
-            child: ratingWidget?.full ?? item,
+        child: Center(
+          child: SizedBox(
+            width: widget.itemSize,
+            height: widget.itemSize,
+            child: FittedBox(
+              child: ratingWidget?.full ?? item,
+            ),
           ),
         ),
       );
@@ -506,16 +508,18 @@ class _NoRatingWidget extends StatelessWidget {
       width: size,
       child: DecoratedBox(
         decoration: decoration ?? const BoxDecoration(),
-        child: FittedBox(
-          child: enableMask
-              ? ColorFiltered(
-                  colorFilter: ColorFilter.mode(
-                    unratedColor,
-                    BlendMode.srcIn,
-                  ),
-                  child: child,
-                )
-              : child,
+        child: Center(
+          child: FittedBox(
+            child: enableMask
+                ? ColorFiltered(
+                    colorFilter: ColorFilter.mode(
+                      unratedColor,
+                      BlendMode.srcIn,
+                    ),
+                    child: child,
+                  )
+                : child,
+          ),
         ),
       ),
     );
