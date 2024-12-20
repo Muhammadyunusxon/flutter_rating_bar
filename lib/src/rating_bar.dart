@@ -300,10 +300,8 @@ class _RatingBarState extends State<RatingBar> {
         child: SizedBox(
           width: widget.itemSize,
           height: widget.itemSize,
-          child: Center(
-            child: FittedBox(
-              child: ratingWidget?.full ?? item,
-            ),
+          child: FittedBox(
+            child: Center(child: ratingWidget?.full ?? item),
           ),
         ),
       );
@@ -508,18 +506,16 @@ class _NoRatingWidget extends StatelessWidget {
       width: size,
       child: DecoratedBox(
         decoration: decoration ?? const BoxDecoration(),
-        child: Center(
-          child: FittedBox(
-            child: enableMask
-                ? ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                      unratedColor,
-                      BlendMode.srcIn,
-                    ),
-                    child: child,
-                  )
-                : child,
-          ),
+        child: FittedBox(
+          child: enableMask
+              ? ColorFiltered(
+                  colorFilter: ColorFilter.mode(
+                    unratedColor,
+                    BlendMode.srcIn,
+                  ),
+                  child: Center(child: child),
+                )
+              : child,
         ),
       ),
     );
