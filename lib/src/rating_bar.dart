@@ -297,10 +297,10 @@ class _RatingBarState extends State<RatingBar> {
     } else {
       resolvedRatingWidget = DecoratedBox(
         decoration: widget.decoration ?? const BoxDecoration(),
-        child: Center(
-          child: SizedBox(
-            width: widget.itemSize,
-            height: widget.itemSize,
+        child: SizedBox(
+          width: widget.itemSize,
+          height: widget.itemSize,
+          child: Center(
             child: FittedBox(
               child: ratingWidget?.full ?? item,
             ),

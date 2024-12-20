@@ -207,7 +207,10 @@ class _MyAppState extends State<MyApp> {
           allowHalfRating: true,
           unratedColor: Colors.black,
           itemCount: 5,
-          decoration: BoxDecoration(),
+          decoration: BoxDecoration(
+            color: Colors.red,
+            shape: BoxShape.circle,
+          ),
           itemSize: 40.0,
           itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
           itemBuilder: (context, _) => Icon(
